@@ -6,10 +6,12 @@
 
     <h1>Products list</h1>
     {% if products is not empty %}
-
+    {{ dump(products) }}
     {% else %}
     <p>There's no products</p>
     {% endif %}
+
+    {{ form(add_form) }}
 
 {% endblock %}
 
@@ -27,4 +29,3 @@
         <li>Your template at <code><a href="{{ '/home/fairfightking/DW/my_project/templates/products/index.html.twig'|file_link(0) }}">templates/products/index.html.twig</a></code></li>
     </ul>
 </div>#}
-{% endblock %}
