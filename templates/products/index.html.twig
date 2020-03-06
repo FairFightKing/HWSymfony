@@ -7,6 +7,27 @@
     <h1>Products list</h1>
     {% if products is not empty %}
     {{ dump(products) }}
+
+        <table border="1">
+            <thead>
+            <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Quantity</td>
+                <td>Price</td>
+            </tr>
+            <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.price }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            </thead>
+        </table>
     {% else %}
     <p>There's no products</p>
     {% endif %}

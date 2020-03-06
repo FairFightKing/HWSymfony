@@ -37,4 +37,22 @@ class ProductController extends AbstractController
             'add_form' => $form->createView()
         ]);
     }
+/*
+ * @Route('/product/{id}', name='a_product')
+ * */
+    public function product(Product $product, Request $request){
+
+        $form = $this->createForm(ProductType::class,$product);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $pdo = $this->getDoctrine()->getManager();
+            $pdo->persist($product);
+            $pdo->flush();
+        }
+
+        return $this->render('product/product.html.twig', [
+            'category' => $product,
+            'form_edit' => $form->createView()
+        ]);
+    }
 }
