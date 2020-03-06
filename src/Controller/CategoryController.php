@@ -58,5 +58,21 @@ class CategoryController extends AbstractController
             'form_edit' => $form->createView()
             ]);
     }
+    /**
+     * @Route("/category/delete/{id}", name="delete_category")
+     * */
+    public function delete(Category $category=null){
+
+        if ($category != null){
+            $pdo = $this->getDoctrine()->getManager();
+            $pdo->remove($category);
+            $pdo->flush();
+
+            $this->addFlash('success', 'delete successfull');
+        } else{
+            $this->addFlash('error','Not found');
+        }
+        return $this->redirectToRoute('categories');
+    }
 
 }

@@ -40,7 +40,6 @@ class Product
     /**
      * @ORM\Column(type="float")
      * @Assert\NotNull
-     * @Assert\Type('float')
      * @Assert\GreaterThanOrEqual(0)
      */
     private $price;

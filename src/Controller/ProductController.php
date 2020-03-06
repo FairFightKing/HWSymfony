@@ -18,11 +18,6 @@ class ProductController extends AbstractController
         $pdo = $this->getDoctrine()->getManager();
 
         $products = $pdo->getRepository(Product::class)->findAll();
-        /*
-        return $this->render('products/index.html.twig', [
-            'controller_name' => 'ProductController',
-        ]);
-        */
 
         $product = new Product();
         $form = $this->createForm(ProductType::class,$product);
@@ -37,22 +32,38 @@ class ProductController extends AbstractController
             'add_form' => $form->createView()
         ]);
     }
-/*
- * @Route('/product/{id}', name='a_product')
- * */
-    public function product(Product $product, Request $request){
+    /**
+     * @Route("/product/edit/{id}", name="a_product")
+     * */
+    public function product(Product $product, Request $request)
+    {
+        if ($product != null) {
+            $form = $this->createForm(ProductType::class, $product);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $pdo = $this->getDoctrine()->getManager();
+                $pdo->persist($product);
+                $pdo->flush();
+            }
 
-        $form = $this->createForm(ProductType::class,$product);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
+            return $this->render('products/product.html.twig', [
+                'product' => $product,
+                'form_edit' => $form->createView()
+            ]);
+        } else {
+            return $this->redirectToRoute('products');
+        }
+    }
+    /**
+     * @Route("/product/delete/{id}", name="delete_product")
+     * */
+    public function delete(Product $product=null){
+
+        if ($product != null){
             $pdo = $this->getDoctrine()->getManager();
-            $pdo->persist($product);
+            $pdo->remove($product);
             $pdo->flush();
         }
-
-        return $this->render('product/product.html.twig', [
-            'category' => $product,
-            'form_edit' => $form->createView()
-        ]);
+        return $this->redirectToRoute('products');
     }
 }

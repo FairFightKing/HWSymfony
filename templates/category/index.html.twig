@@ -13,16 +13,21 @@
         <tr>
             <th>Nom</th>
             <th>Description</th>
+            <th>delete</th>
         </tr>
         </thead>
         <tbody>
-        {% for categorie in categories %}
+        {% for category in categories %}
             <tr>
                 <td><a href="{{ path('a_category',{'id':category.id}) }}">
-                    {{ categorie.name }}
+                    {{ category.name }}
                     </a>
                     </td>
-                <td>{{ categorie.description }}</td>
+                <td>{{ category.description }}</td>
+                <td><a href="{{ path('delete_category',{'id':category.id}) }}">
+                        delete
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
