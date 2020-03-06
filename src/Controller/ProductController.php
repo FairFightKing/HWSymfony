@@ -63,6 +63,9 @@ class ProductController extends AbstractController
             $pdo = $this->getDoctrine()->getManager();
             $pdo->remove($product);
             $pdo->flush();
+            $this->addFlash('success', 'delete successfull');
+        } else{
+            $this->addFlash('error','Not found');
         }
         return $this->redirectToRoute('products');
     }
