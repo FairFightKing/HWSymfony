@@ -44,6 +44,8 @@ class ProductController extends AbstractController
                 $pdo = $this->getDoctrine()->getManager();
                 $pdo->persist($product);
                 $pdo->flush();
+                $this->addFlash('success', 'add successfull');
+
             }
 
             return $this->render('products/product.html.twig', [
@@ -52,6 +54,8 @@ class ProductController extends AbstractController
             ]);
         } else {
             return $this->redirectToRoute('products');
+            $this->addFlash('error', 'Not found');
+
         }
     }
     /**
