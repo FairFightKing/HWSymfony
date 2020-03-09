@@ -43,10 +43,8 @@ class CategoryController extends AbstractController
      */
     public function category(Category $category, Request $request){
 
-
-
         $form = $this->createForm(CategoryType::class,$category);
-        $form->handleRequest($request);
+           $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $pdo = $this->getDoctrine()->getManager();
             $pdo->persist($category);
