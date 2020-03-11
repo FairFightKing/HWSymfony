@@ -7,13 +7,17 @@ use App\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * @Route("/{_locale}")
+ */
 class CategoryController extends AbstractController
 {
     /**
      * @Route("/categories", name="categories")
      */
-    public function index(Request $request)
+    public function index(Request $request,TranslatorInterface $translator)
     {
         $pdo = $this->getDoctrine()->getManager();
 
@@ -31,6 +35,9 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $pdo->persist($category);
             $pdo->flush();
+            $this->addFlash('success',
+                $translator->trans('category.added')
+            );
         }
 
         return $this->render('category/index.html.twig',[

@@ -1,3 +1,5 @@
 index:
-    path: /
+    path: /{_locale}
     controller: App\Controller\ProductController::index
+    requirements:
+        _locale: en|fr

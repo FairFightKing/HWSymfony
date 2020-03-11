@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/{_Locale}")
+ */
 class ProductController extends AbstractController
 {
     /**

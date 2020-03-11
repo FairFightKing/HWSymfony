@@ -4,18 +4,18 @@
 
 {% block body %}
 
-    <h1>Products list</h1>
+    <h1>{{ 'product.title'|trans }}</h1>
     {% if products is not empty %}
     {{ dump(products) }}
 
         <table border="1">
             <thead>
             <tr>
-                <td>Name</td>
-                <td>Description</td>
-                <td>Quantity</td>
-                <td>category</td>
-                <td>Price</td>
+                <td>{{ 'product.Name'|trans }}</td>
+                <td>{{ 'product.Description'|trans }}</td>
+                <td>{{ 'product.Quantity'|trans }}</td>
+                <td>{{ 'product.category'|trans }}</td>
+                <td>{{ 'product.Price'|trans }}</td>
             </tr>
             <tbody>
             {% for product in products %}

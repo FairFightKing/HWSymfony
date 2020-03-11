@@ -1,0 +1,12 @@
+product:
+  title: 'Liste des produits'
+  Name: 'Nom'
+  Description: 'Description'
+  Quantity: 'Quantite'
+  Category: 'Categorie'
+  Price: 'Prix'
+
+category:
+  added: 'ajout des categories'
+
+Nom: 'Nom'
